@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      *,
+      *:before,
+      *:after {
+        box-sizing: border-box;
+      }
+
+      body {
+        background: #5c0490;
+        color: #fff;
+        margin: 0;
+        /* don't give body a fixed height, probably won't affect disco image scaling solution, just an odd thing to do, that could cause unexpected things to happen */
+      }
+
+      .room {
+        /* useful because we never want scrolling, but not necessary for disco image scaling solution */
+        position: fixed;
+
+        display: grid;
+        grid-template-rows: 0em auto 4em;
+        grid-template-columns: 0em minmax(15em, 30em) minmax(60%, auto) 0em;
+        grid-gap: 2em;
+        grid-template-areas:
+          ". . . ."
+          ". sidebar videos ."
+          "appbar appbar appbar appbar";
+
+        width: 100%;
+        height: 100vh;
+      }
+
+      main {
+        background: purple;
+        grid-area: videos;
+      }
+
+      aside {
+        background: purple;
+        grid-area: sidebar;
+      }
+
+      footer {
+        background: purple;
+        grid-area: appbar;
+      }
+
+      .instructions {
+        background: green;
+        height: 80%;
+      }
+
+      .disco {
+        background: yellow
+          url(https://upload.wikimedia.org/wikipedia/commons/thumb/9/95/Disco_ball_1.jpg/800px-Disco_ball_1.jpg)
+          no-repeat center center;
+        background-size: contain;
+        height: calc(
+          100% - 200px
+        ); /* px value must equal .instructions-content height */
+      }
+
+      .instructions-content {
+        background: olive;
+        /* it's ok to set fixed height here because child element height do not scale, and breakpoints could be used to change height if needed  */
+        height: 200px; /* must equal .disco height px value in calc function */
+      }
+
+      .participants-flow {
+        background: orange;
+        height: 20%;
+        overflow: hidden;
+      }
+
+      h1 {
+        margin: 0; /* remove margins just so background colors are more clear, not important for the solution */
+      }
+    </style>
+  </head>
+  <body>
+    <div class="room">
+      <main>
+        <div class="instructions">
+          <div class="disco">
+            <!-- disco ball background image -->
+          </div>
+          <div class="instructions-content">
+            <h1>Nobody is here yet</h1>
+            <p>Send link...</p>
+            <input type="text" placeholder="https..." />
+          </div>
+        </div>
+        <div class="participants-flow">participants-flow</div>
+      </main>
+      <aside>
+        sidebar
+      </aside>
+      <footer>
+        App Bar
+      </footer>
+    </div>
+  </body>
+</html>
